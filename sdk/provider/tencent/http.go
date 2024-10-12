@@ -15,8 +15,8 @@ import (
 
 type ApiExtractor struct {
 	Service struct {
-		SubDomain string `json:"subDomain"`
-	} `json:"service"`
+		ExtranetUrl string `json:"ExtranetUrl"`
+	} `json:"NetConfig"`
 }
 
 func (p *Provider) DeployHttpProxy(opts *sdk.FunctionOpts) (string, error) {
@@ -98,22 +98,16 @@ func (p *Provider) createHttpTrigger(namespace, functionName, triggerName string
 	r := scf.NewCreateTriggerRequest()
 	r.FunctionName = common.StringPtr(functionName)
 	r.TriggerName = common.StringPtr(triggerName)
-	r.Type = common.StringPtr("apigw")
+	r.Type = common.StringPtr("http")
 	r.TriggerDesc = common.StringPtr(`{
-				"api":{
-					"authRequired":"FALSE",
-					"requestConfig":{
-						"method":"POST"
-					},
-					"isIntegratedResponse":"TRUE"
-				},
-				"service":{
-					"serviceName":"SCF_API_SERVICE"
-				},
-				"release":{
-					"environmentName":"release"
-				}
-			}`)
+			"AuthType": "NONE",
+			"NetConfig": {
+				"EnableIntranet": true,
+				"EnableExtranet":  true
+			}
+		}
+	`)
+	r.Enable = common.StringPtr("OPEN")
 	r.Namespace = common.StringPtr(namespace)
 
 	response, err := p.fclient.CreateTrigger(r)
@@ -127,7 +121,7 @@ func (p *Provider) createHttpTrigger(namespace, functionName, triggerName string
 		return "", err
 	}
 
-	api := extractor.Service.SubDomain
+	api := extractor.Service.ExtranetUrl
 	return api, nil
 }
 

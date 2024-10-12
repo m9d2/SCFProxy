@@ -1,6 +1,6 @@
 module github.com/shimmeris/SCFProxy
 
-go 1.23.2
+go 1.22.8
 
 require (
 	github.com/alibabacloud-go/darabonba-openapi/v2 v2.0.2
@@ -18,9 +18,9 @@ require (
 	github.com/pelletier/go-toml v1.9.5
 	github.com/sirupsen/logrus v1.9.0
 	github.com/spf13/cobra v1.6.1
-	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/apigateway v1.0.556
-	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.556
-	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/scf v1.0.556
+	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/apigateway v1.0.1018
+	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.1018
+	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/scf v1.0.1018
 	golang.org/x/exp v0.0.0-20221211140036-ad323defaf05
 )
 
